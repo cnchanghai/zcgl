@@ -25,7 +25,9 @@ SECRET_KEY = 'ch2=mrlzu#6(o@q_$&n0!wlh3x(!w10hm-8ey+25b9*^gc&m=0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'192.168.3.166',
+]
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gzgl',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +78,16 @@ WSGI_APPLICATION = 'zcgl.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+	'NAME': 'zcgl',
+	'USER':'root',
+	'PASSWORD':'123456',
+	'HOST':'127.0.0.1',
+	'PORT':'3306',
+	'OPTIONS': {
+            'init_command': 'SET innodb_strict_mode=1',
+        },
+
     }
 }
 
@@ -105,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -116,5 +127,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR,'/static/')
+#STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'cnchanghai@163.com'
+EMAIL_HOST_PASSWORD = 'empire8888'
+DEFAULT_FROM_EMAIL = 'SeerTV<cnchanghai@163.com>'
+
