@@ -3,14 +3,17 @@ from django.contrib import admin
 
 # Create your models here.
 class depts(models.Model):
-    id = models.AutoField(primary_key=True)
+    dname=models.CharField(max_length=50)
+    def __unicode__(self):
+        return self.dname
+
+class depts2(models.Model):
     dname=models.CharField(max_length=50)
     def __unicode__(self):
         return self.dname
 
 
 class users(models.Model):
-    id = models.AutoField(primary_key=True)
     name=models.CharField(max_length=20)
     uname=models.CharField(max_length=20,unique=True)
     upasswd=models.CharField(max_length=50)
@@ -19,49 +22,47 @@ class users(models.Model):
     delass=models.IntegerField()
     wxass=models.IntegerField()
     jhass=models.IntegerField()
-    beizhu=models.CharField(max_length=150)
+    beizhu=models.CharField(max_length=150,null=True)
     def __unicode__(self):
         return self.uname
 class gdzc(models.Model):
-    id = models.AutoField(primary_key=True)
     zcid=models.CharField(max_length=20,unique=True)
     zcm=models.CharField(max_length=20)
-    zcxh=models.CharField(max_length=20)
+    zcxh=models.CharField(max_length=50)
     zxlb=models.CharField(max_length=20)
     ccrq=models.DateField()
     rkrq=models.DateField()
-    user=models.IntegerField()
+    user=models.IntegerField(null=True)
     stat=models.CharField(max_length=10)
     price=models.FloatField()
     cost=models.IntegerField()
-    beizhu=models.CharField(max_length=150)
+    beizhu=models.CharField(max_length=150,null=True)
     def __unicode__(self):
         return self.zcid
 class czjl(models.Model):
-    id=models.AutoField(primary_key=True)
     zcid=models.CharField(max_length=20)
     optuser=models.IntegerField()
     opts=models.CharField(max_length=10)
     czrq=models.DateTimeField()
-    beizhu=models.CharField(max_length=150)
+    beizhu=models.CharField(max_length=150,null=True)
     def __unicode__(self):
-        return self.czrq
+        return self.zcid
 class jcwx(models.Model):
-    id=models.AutoField(primary_key=True)
     zcid=models.CharField(max_length=20)
+    optuser = models.IntegerField()
     opts=models.CharField(max_length=10)
-    optuser=models.IntegerField()
     xgry=models.IntegerField()
     ckrq=models.DateField()
-    rkrq=models.DateField()
-    beizhu=models.CharField(max_length=150)
+    rkrq=models.DateField(null=True)
+    beizhu=models.CharField(max_length=150,null=True)
     def __unicode__(self):
-        return self.id
+        return self.zcid
 class baofei(models.Model):
-    id=models.AutoField(primary_key=True)
     zcid=models.CharField(max_length=20,unique=True)
+    optuser = models.IntegerField()
     bfyy=models.CharField(max_length=200)
-    beizhu=models.CharField(max_length=150)
+    bfrq=models.DateField()
+    beizhu=models.CharField(max_length=150,null=True)
     def __unicode__(self):
         return self.zcid
 
